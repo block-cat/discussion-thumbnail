@@ -34,7 +34,7 @@ app.initializers.add('block-cat/discussion-thumbnail', () => {
 
     // Added by BlockCat
     if (author === undefined) {
-      autor = find(tooltip, 'DiscussionListItem-author--grid');
+      author = find(tooltip, 'DiscussionListItem-author--grid');
     }
 
     const avatar = find(author, 'Avatar');
