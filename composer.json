@@ -1,0 +1,31 @@
+{
+  "name": "block-cat/discussion-thumbnail",
+  "description": "Replace author avatars with first image in a discussion's starting post (modified)",
+  "keywords": [
+    "flarum",
+    "discussion"
+  ],
+  "type": "flarum-extension",
+  "license": "MIT",
+  "require": {
+    "flarum/core": "^1.0.0"
+  },
+  "authors": [{
+    "name": "BlockCat"
+  }],
+  "autoload": {
+    "psr-4": {
+      "BlockCat\\DiscussionThumbnail\\": "src/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "BkC Discussion Thumbnail",
+      "icon": {
+        "name": "far fa-image",
+        "backgroundColor": "#083",
+        "color": "#fff"
+      }
+    }
+  }
+}
