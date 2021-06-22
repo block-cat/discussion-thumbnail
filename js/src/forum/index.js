@@ -23,13 +23,27 @@ app.initializers.add('block-cat/discussion-thumbnail', () => {
     if (!content || !content.children) return;
 
     const tooltip = content.children.find((e) => e.tag && e.tag === Tooltip);
+    // Modified by BLockCat
     const author = find(tooltip, 'DiscussionListItem-author');
-    const avatar = find(author, 'Avatar');
+    if (author === undefined) {
+      const autor = find(tooltip, 'DiscussionListItem-author--grid');
+      
+      const avatar = find(autor, 'Avatar');
     
-    if (!avatar) return;
+      if (!avatar) return;
 
-    delete avatar.attrs.src;
-    
-    author.children[author.children.indexOf(avatar)] = <DiscussionThumbnail elementAttrs={avatar.attrs} src={image} />;
+      delete avatar.attrs.src;
+      
+      author.children[author.children.indexOf(avatar)] = <DiscussionThumbnail elementAttrs={avatar.attrs} src={image} />;
+    } else {
+      const avatar = find(author, 'Avatar');
+      
+      if (!avatar) return;
+  
+      delete avatar.attrs.src;
+      
+      author.children[author.children.indexOf(avatar)] = <DiscussionThumbnail elementAttrs={avatar.attrs} src={image} />;
+    }
+    // End modification
   });
 });
