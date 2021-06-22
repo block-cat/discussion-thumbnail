@@ -18,32 +18,31 @@ app.initializers.add('block-cat/discussion-thumbnail', () => {
   
     if (!image) return;
 
-    const content = find(vdom, 'DiscussionListItem-content');
+    // Modified by BLockCat
+    let content = find(vdom, 'DiscussionListItem-content');
+
+    // Added by BlockCat
+    if (content === undefined) {
+      content = find(vdom, 'DiscussionListItem-content--grid');
+    }
 
     if (!content || !content.children) return;
 
     const tooltip = content.children.find((e) => e.tag && e.tag === Tooltip);
     // Modified by BLockCat
-    const author = find(tooltip, 'DiscussionListItem-author');
-    if (author === undefined) {
-      const autor = find(tooltip, 'DiscussionListItem-author--grid');
-      
-      const avatar = find(autor, 'Avatar');
-    
-      if (!avatar) return;
+    let author = find(tooltip, 'DiscussionListItem-author');
 
-      delete avatar.attrs.src;
-      
-      author.children[author.children.indexOf(avatar)] = <DiscussionThumbnail elementAttrs={avatar.attrs} src={image} />;
-    } else {
-      const avatar = find(author, 'Avatar');
-      
-      if (!avatar) return;
-  
-      delete avatar.attrs.src;
-      
-      author.children[author.children.indexOf(avatar)] = <DiscussionThumbnail elementAttrs={avatar.attrs} src={image} />;
+    // Added by BlockCat
+    if (author === undefined) {
+      autor = find(tooltip, 'DiscussionListItem-author--grid');
     }
-    // End modification
+
+    const avatar = find(author, 'Avatar');
+    
+    if (!avatar) return;
+
+    delete avatar.attrs.src;
+    
+    author.children[author.children.indexOf(avatar)] = <DiscussionThumbnail elementAttrs={avatar.attrs} src={image} />;
   });
 });
